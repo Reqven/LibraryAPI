@@ -17,6 +17,4 @@ Books.sync({force: true})
         return Promise.all(books.map(books => Books.create(books)));
     });
 
-//2015-20-05
-//yyyy-mm-dd
 module.exports = Books;

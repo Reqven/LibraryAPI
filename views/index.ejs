@@ -3,9 +3,66 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+
+      .http-method {
+      text-transform: uppercase;
+      }
+
+      pre.get {
+        background-color: #0f6ab4;
+      }
+
+      pre.post {
+        background-color: #10a54a;
+      }
+
+      pre.put {
+        background-color: #c5862b;
+      }
+
+      pre.delete {
+        background-color: #a41e22;
+      }
+      .huge	{
+        color: #fff;
+      }
+
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+
+      code {
+        white-space: pre;
+      }
+    </style>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <br>
+    Authors
+    <ul>
+      <li>Raphaël Renout <a href="mailto:raphael.renout@gmail.com">raphael.renout@gmail.com</a></li>
+      <li>Anthony Barei <a href="mailto:anthony.barei@outlook.fr">anthony.barei@outlook.fr</a></li>
+      <li>Manu Marchand <a href="mailto:manuu.marchand@gmail.com">manuu.marchand@gmail.com</a></li>
+    </ul>
+    <br> 
+    <p>API documentation available <a href="documentation">here</a></p>
+    <p>Swagger API file available <a href="swagger">here</a></p>
+    <br>
+    <p>Note: You might not be able to send DELETE, POST or PUT queries from your browser with a simple URL, use a software, an extension or the browser console instead.</p>
+    <pre class="example">
+      <code>
+  var request = new XMLHttpRequest();
+  request.open("POST", "https://library-api--dev.herokuapp.com/books/add?name=Les Misérables&author=Victor Hugo", true);
+  request.send();
+      </code></pre>
   </body>
 </html>

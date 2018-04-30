@@ -25,7 +25,9 @@ const Books = (sequelize, DataTypes) => {
                 isDate: {
                     msg: 'Release date is incorrect!'
                 }
-            } 
+            }
+            //2015-20-05
+            //yyyy-mm-dd
         },
         available: {
             type: DataTypes.BOOLEAN,
@@ -38,17 +40,6 @@ const Books = (sequelize, DataTypes) => {
                 }
             }
         },
-        /*
-        loan_start_date: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: new Date(),
-            validate: {
-                isDate: {
-                    msg: 'Date passed is incorrect!'
-                }
-            }
-        }*/
     });
 };
 
