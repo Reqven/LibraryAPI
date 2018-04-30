@@ -5,15 +5,13 @@ var router  = express.Router();
 
 //get books list or a specific book by sending its id
 router.get('/', async (req, res, next) => {
-    console.log(req.query);
     if (req.query && req.query.id) {
         Books.find({
             where: {
                 id: req.query.id
             }
         }).then(book => {
-            console.log(book);
-            if (book != null)
+            if (book)
                 return res.status(200).send(book);
             else {
                 return res.status(404).json({
@@ -25,14 +23,13 @@ router.get('/', async (req, res, next) => {
         });
     } else {
         Books.findAll().then(books => {
-            console.log('all');
             return res.status(200).send(books);
         })
     }
 });
 
 //delete book by Book.id
-router.get('/delete', async (req, res, next) => {
+router.delete('/delete', async (req, res, next) => {
     if(req.query.id && req.query.id != '') {
         Books.destroy({
             where: {
@@ -56,33 +53,34 @@ router.get('/delete', async (req, res, next) => {
 });
 
 //add a new book
-router.get('/add', async (req, res, next) => {
+router.post('/add', async (req, res, next) => {
     if(req.query) {
         Books.create(req.query)
             .then(book => {
-                return res.status(200).json({
+                return res.status(201).json({
                     msg: 'The book has been successfully created',
                     book: book
                 });
             }).catch(e => {
-                return res.status(404).json({
+                return res.status(400).json({
                     msg: e.errors[0].message
                 });
             });
     } else {
-        res.status(400).send('Missing data');
+        res.status(400).json({
+            msg: 'Missing data'
+        });
     }
 });
 
 //update an existing book
-router.get('/update', async (req, res, next) => {
+router.put('/update', async (req, res, next) => {
     if (req.query && req.query.id) {
         Books.find({
             where: {
                 id: req.query.id
             }
         }).then(book => {
-            console.log(book);
             if (book) {
                 Books.update(req.query, { 
                     where: {
@@ -108,8 +106,11 @@ router.get('/update', async (req, res, next) => {
             });
         });
     } else {
-        res.status(400).send('Missing data');
+        res.status(400).json({
+            msg: 'The required param id is missing'
+        });
     }
 });
+
 
 module.exports = router;
